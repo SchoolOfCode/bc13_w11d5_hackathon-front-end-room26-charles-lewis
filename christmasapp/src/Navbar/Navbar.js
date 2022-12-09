@@ -1,4 +1,5 @@
 import React from 'react'
+import './Navbar.css'
 import {useState,useEffect} from 'react'
 import {AddPresent} from '../AddPresent/AddPresent.js'
 
@@ -6,18 +7,20 @@ import {AddPresent} from '../AddPresent/AddPresent.js'
 export function Navbar({people, setName, name}) {
 
     const [formVis, setVis] = useState(false)
-    //const [value, setValue] = useState()
 
+    const visibility = e => {
+        setVis(current => !current)
+    }
 
 
 
     return (
         <>
-        <div style={{visibility: formVis ? "visible" : "hidden"}}>
-            <AddPresent></AddPresent>
+        <div className="addPresentForm" style={{visibility: formVis ? "visible" : "hidden"}}>
+            <AddPresent visibility={visibility}></AddPresent>
         </div>
 
-        <button onClick={()=>{setVis(current=>!current)}}>Add present</button>
+        <button onClick={visibility}>Add present</button>
 
         <select onChange={(e)=>{setName(e.target.value)}} value={name}>
 
