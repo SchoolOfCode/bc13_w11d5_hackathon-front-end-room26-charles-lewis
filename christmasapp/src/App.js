@@ -4,27 +4,41 @@ import {PresentList} from './PresentList/PresentList.js'
 import {Navbar} from './Navbar/Navbar.js'
 import {Header} from './Header/Header.js'
 
-const url = 'localhost:3000'
+const url = 'localhost:3001'
+
 
 function App() {
   const [people, setPeople] = useState([])
+  const [name, setName] = useState()
+  const [singleSearch, setSingleSearch] = useState()
   
+  useEffect(() => {
+    const search = people.filter(person => person.name === name)
+    setSingleSearch(search)
+  }, [name, people])
+
+
 
   useEffect(() => {
-    fetch(`${url}`, {
-      headers: { Accept: 'application/json' },
-    })
-      .then((res) => res.json())
-      .then(({response}) => setPeople(response))
-      
+    async function getResults() {
+
+      const response = await fetch(`http://${url}/api`, {
+        headers: { Accept: 'application/json' },
+      })
+      const data = await response.json()
+
+      setPeople(data)
+    }
+    getResults()  
   }, [])
+
 
   return (
     <div className="App">
       <>
-        <Navbar></Navbar>
+        <Navbar setName={setName} name={name} people={people}></Navbar>
         <Header></Header>
-        <PresentList people={people}></PresentList>
+        <PresentList people={singleSearch}></PresentList>
       </>
     </div>
   );

@@ -3,16 +3,13 @@ import {useState,useEffect} from 'react'
 import {AddPresent} from '../AddPresent/AddPresent.js'
 
 
-export function Navbar(props) {
+export function Navbar({people, setName, name}) {
 
     const [formVis, setVis] = useState(false)
-    const [value, setValue] = useState()
+    //const [value, setValue] = useState()
 
-    // useEffect(()=>{
-    //     const response = await fetch("localhost:3000/value")
-    //     const data = await response.json()
-    //     return data
-    // },[value])
+
+
 
     return (
         <>
@@ -22,10 +19,12 @@ export function Navbar(props) {
 
         <button onClick={()=>{setVis(current=>!current)}}>Add present</button>
 
-        <select onChange={(e)=>{setValue(e.target.value)}} value={value}>
+        <select onChange={(e)=>{setName(e.target.value)}} value={name}>
 
-            {props.people.map((person) => {
-                return <option value={person.name}>{person.name}</option>
+            {people.map((person) => {
+               
+                return <option key={Math.random()*1000}value={person.name}>{person.name}</option>
+              
             })}
 
         </select>
