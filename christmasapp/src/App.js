@@ -1,11 +1,12 @@
 import './App.css';
-import {useState, useEffect, createContext, useContext} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import {PresentList} from './PresentList/PresentList.js'
 import {Navbar} from './Navbar/Navbar.js'
 import {Header} from './Header/Header.js'
 
 
-const url = 'https://santaswishlist.onrender.com'
+
+const url = 'localhost:3001'
 
 
 function App() {
@@ -34,14 +35,13 @@ function App() {
 
   async function postNewPresent(data) {
     console.log(data)
-    const response = await fetch(`http://${url}/api/${data.name}`, {
+    const response = await fetch(`http://${url}/api`, {
       method: "POST",
       headers: { Accept: 'application/json' },
       body: JSON.stringify(data)
     })
     console.log(response)
   }
-  
 
 
   return (
