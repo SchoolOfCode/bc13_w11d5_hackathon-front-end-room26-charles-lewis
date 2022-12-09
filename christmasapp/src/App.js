@@ -18,8 +18,6 @@ function App() {
     setSingleSearch(search)
   }, [name, people])
 
-
-
   useEffect(() => {
     async function getResults() {
 
@@ -29,18 +27,25 @@ function App() {
       const data = await response.json()
 
       setPeople(data)
-
     }
-   
-  getResults() 
-     
+  getResults()    
   }, [])
+
+  async function postNewPresent(data) {
+    console.log(data)
+    const response = await fetch(`http://${url}/api/${data.name}`, {
+      method: "POST",
+      headers: { Accept: 'application/json' },
+      body: JSON.stringify(data)
+    })
+    console.log(response)
+  }
 
 
   return (
     <div className="App">
       <>
-        <Navbar setName={setName} name={name} people={people}></Navbar>
+        <Navbar addPresent={postNewPresent} setName={setName} name={name} people={people} single={singleSearch}></Navbar>
         <Header></Header>
         <PresentList people={singleSearch}></PresentList>
       </>

@@ -1,15 +1,27 @@
 import React from 'react'
 
 export function PresentItem({person}) {
-    //console.log(person.presents.split(','))
-    
+   
+    if (person.presents.length > 1){
     return(
         <>
             <h3>{person.name}</h3>
             {person.presents.map((present) => {
-                return <h4 key={Math.random()*100}>{present}</h4>
+                return <div className>
+                          <h4 key={Math.random()*100}>{present}</h4>
+                          <button>Done</button>
+                       </div>
             })}
-            <button>done</button>
+            
         </>
     )
+    }else{
+        return(
+            <div>
+                
+                <h4>{person.present}</h4>
+                <button>Done</button>
+            </div>
+        )
+    }
 }

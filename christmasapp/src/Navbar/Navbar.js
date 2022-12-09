@@ -1,10 +1,10 @@
 import React from 'react'
 import './Navbar.css'
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 import {AddPresent} from '../AddPresent/AddPresent.js'
 
 
-export function Navbar({people, setName, name}) {
+export function Navbar({people, setName, name, addPresent, single}) {
 
     const [formVis, setVis] = useState(false)
 
@@ -17,7 +17,7 @@ export function Navbar({people, setName, name}) {
     return (
         <>
         <div className="addPresentForm" style={{visibility: formVis ? "visible" : "hidden"}}>
-            <AddPresent visibility={visibility}></AddPresent>
+            <AddPresent name={single} addPresent={addPresent} visibility={visibility}></AddPresent>
         </div>
 
         <button onClick={visibility}>Add present</button>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
 
-export function AddPresent({visibility}) {
+export function AddPresent({name, visibility, addPresent}) {
 
 const {
   register,
@@ -11,8 +11,10 @@ const {
 
 const onSubmit = (data) => {
   visibility()
+  addPresent(data)
   reset()
 }
+
 
   return (
     <div>AddPresent
@@ -34,7 +36,7 @@ const onSubmit = (data) => {
                {...register("present", {
                 required: true
                })}
-               defaultValue={""}>
+               defaultValue="">
         </input>
       {errors.present && errors.present.type === "required" && (
         <p>Present must not be left blank.</p>
@@ -43,4 +45,5 @@ const onSubmit = (data) => {
       </form>
     </div>
   )
+
 }
