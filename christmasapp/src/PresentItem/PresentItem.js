@@ -1,10 +1,11 @@
 import React from 'react'
+import './PresentItem.css'
 
 export function PresentItem({person}) {
    
-    if (person.presents.length > 1){
+    if (person.presents.length > 0){
     return(
-        <>
+        <div className="presentItem">
             <h3>{person.name}</h3>
             {person.presents.map((present) => {
                 return <div className>
@@ -13,11 +14,11 @@ export function PresentItem({person}) {
                        </div>
             })}
             
-        </>
+        </div>
     )
     }else{
         return(
-            <div>
+            <div className="presentItem">
                 
                 <h4>{person.present}</h4>
                 <button>Done</button>
